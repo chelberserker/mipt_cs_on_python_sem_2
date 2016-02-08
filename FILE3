@@ -1,0 +1,8 @@
+import sys
+import os
+
+for arg in sys.argv:
+	  input = open(arg, 'r')
+	  print(input.readlines())
+	  print()
+	  #print([rstrip() for x in input.readlines()])
