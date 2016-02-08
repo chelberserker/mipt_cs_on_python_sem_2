@@ -1,8 +1,8 @@
 import sys
 import os
 
-for arg in sys.argv:
+for arg in sys.argv[1:]:
 	  input = open(arg, 'r')
-	  print(input.readlines())
-	  print()
-	  #print([rstrip() for x in input.readlines()])
+	  A = input.readlines()
+	  print(''.join(map(str, A)))
+
