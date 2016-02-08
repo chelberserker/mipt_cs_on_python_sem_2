@@ -1,0 +1,60 @@
+import argparse
+import sys
+
+parser = argparse.ArgumentParser(
+		description = 'Calculator'
+)
+
+
+parser.add_argument(
+    'values',
+    metavar='VALUES',
+    type=int,
+    nargs=2,
+    help='input data'
+)
+
+
+parser.add_argument(
+	'-a',
+	'--action',
+	action = 'store',
+	metavar = 'SIGN',
+	help = 'sign'
+)
+
+parser.add_argument(
+	'-v',
+	'--verbose',
+	action = 'store_true',
+)
+
+
+args = parser.parse_args()
+
+res = 0.0
+"""
+print(args.values[0], args.values[1])
+print(args.action)
+print(args)
+args.action = chr(args.action) 
+"""
+
+
+if args.action == '+':
+	res = args.values[0] + args.values[1]
+elif args.action == '-':
+	res = args.values[0] - args.values[1]
+elif args.action == '*':
+	res = args.values[0] * args.values[1]
+elif args.action == '%':
+	res = args.values[0] / args.values[1]
+	
+#print(type(args.action))
+list = str(args.values[0]) +' ' + args.action+ ' ' + str(args.values[1])+' = ' + str(res)
+#res = eval(list)
+if args.verbose: 
+	print(list)
+else:
+	print(res)
+
