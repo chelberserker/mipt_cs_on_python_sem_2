@@ -1,0 +1,47 @@
+import argparse
+import sys
+
+parser = argparse.ArgumentParser(
+		description = 'file sys'
+)
+parser.add_argument(
+    'values',
+    metavar='VALUES',
+    type=int,
+    nargs='+',
+    help='input data'
+)
+
+parser.add_argument(
+	'--folders-only',
+	action = 'store_true'
+)
+
+parser.add_argument(
+	'--include',
+	type = str,
+	action = 'store',
+	metavar = 'SOMETEXT',
+	help = 'include files with SOMETEXT in name'
+)
+
+parser.add_argument(
+	'--exclude',
+	type = str,
+	action = 'store',
+	metavar = 'SOMETEXT',
+	help = 'exclude files with SOMETEXT in name'
+)
+
+for values in args.values:
+	if os.path.isfolder(values);
+		A = os.listdir
+		for a in A:
+				print(a)
+				
+  
+
+
+
+
+	
