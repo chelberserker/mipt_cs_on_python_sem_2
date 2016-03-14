@@ -1,0 +1,77 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+def read_g(G, vertex, edge):
+    for v in range(edge):
+        A = list(map(int, input.readline().split()))
+        if len(A) == 2:
+            G.add_edge(A[0], A[1])
+        else:
+            G.add_node(A[0])
+
+
+def create_g_list(G):
+    lst = []
+    for i in range(G.number_of_nodes()):
+        lst.append(list(nx.all_neighbors(G,i)))
+    return lst
+
+
+def dfs(G_list, start):
+    path = []
+    T = nx.Graph()
+    visited = [False] * len(G_list)
+    stack = []
+    stack.append(start)
+    while stack:
+        v = stack.pop()
+        if not visited[v]:
+            visited[v] = True
+            path.append(v)
+            for neighbor in G_list[v]:
+                stack.append(neighbor)
+    T = nx.Graph()
+    T.add_path(path)
+    return T
+
+
+def bfs(G_list, start):
+    path = []
+    T = nx.Graph()
+    queue = [start]
+    while queue:
+        v = queue.pop(0)
+        if v not in path:
+            path.append(v)
+            queue = queue + G_list[v]
+    T = nx.Graph()
+    T.add_path(path)
+    return T
+
+#def connected_component():
+#    for i in range(len(G_list)):
+
+
+
+input = open('input.txt', 'r')
+output = open('output.txt', 'w')
+
+G = nx.Graph()
+K = nx.Graph()
+g_par = list(map(int, input.readline().split()))
+read_g(G, g_par[0], g_par[1])
+
+T = nx.dfs_tree(G,1)
+lst_g = create_g_list(G)
+print(lst_g)
+K = bfs(lst_g, 0)
+print(lst_g)
+
+
+
+
+nx.draw(G)
+plt.savefig("path.png") # save as png
+plt.show() # display
+
