@@ -1,47 +1,46 @@
 import argparse
-import sys
+import os 
 
-parser = argparse.ArgumentParser(
-		description = 'file sys'
-)
-parser.add_argument(
-    'values',
-    metavar='VALUES',
-    type=int,
-    nargs='+',
-    help='input data'
-)
+parser = argparse.ArgumentParser(  description='Дерево из файлов директории')
 
-parser.add_argument(
-	'--folders-only',
-	action = 'store_true'
-)
+'''Добавляем параметры для консольной строки'''
+parser.add_argument( 'folders', metavar='FOLDERS', type=str,  nargs='+',  help='folders')
 
-parser.add_argument(
-	'--include',
-	type = str,
-	action = 'store',
-	metavar = 'SOMETEXT',
-	help = 'include files with SOMETEXT in name'
-)
+parser.add_argument( '-f', '--folders-only', action="store_true", help='folders-only')
 
-parser.add_argument(
-	'--exclude',
-	type = str,
-	action = 'store',
-	metavar = 'SOMETEXT',
-	help = 'exclude files with SOMETEXT in name'
-)
+parser.add_argument('-i', '--include', action="store", help='include')
 
-for values in args.values:
-	if os.path.isfolder(values);
-		A = os.listdir
-		for a in A:
-				print(a)
-				
-  
+parser.add_argument('-e',   '--exclude',  action="store",  help='exclude')
+    
+args = parser.parse_args()    
+folders_and_files = args.folders
 
+if args.include:
+    folders_and_files = [ some_text  for some_text   in folders_and_files if args.include in  some_text ]
+    
+if args.include:
+    folders_and_files = [ some_text  for some_text   in folders_and_files if not (args.include in  some_text) ]
 
+for i in folders_and_files:
+    if not os.path.isdir(i):
+        print("Directory ",i," is not existing " )
+        exit()
 
+def tree(i):
+        tr = []
+        content_of_i  = os.listdir(i)
+        if args.include:
+            content_of_i = [file for file in content_of_i if args.include in file]
+        if args.exclude:
+            content_of_i = [file for file in content_of_i if not (args.exclude in file)]
+        for file in content_of_i:
+            if os.path.isdir(i + "/" + file):
+                   tr.append(file + '\n'+ '\n'.join(['-------> ' + i for i in tree(i + '/' + file).split('\n')]) )
+            elif not args.folders_only:
+                tr.append(file)
+        return '\n'.join(tr)
 
-	
+for i in folders_and_files:
+    print('\n','way to directory (',i,'):', '\n',os.path.abspath(i))
+    print('\n',tree(i))
+
