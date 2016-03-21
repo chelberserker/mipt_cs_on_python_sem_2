@@ -1,9 +1,8 @@
 import argparse
 import os 
 
-parser = argparse.ArgumentParser(  description='Дерево из файлов директории')
+parser = argparse.ArgumentParser(  description='Tree')
 
-'''Добавляем параметры для консольной строки'''
 parser.add_argument( 'folders', metavar='FOLDERS', type=str,  nargs='+',  help='folders')
 
 parser.add_argument( '-f', '--folders-only', action="store_true", help='folders-only')
