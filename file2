@@ -49,12 +49,13 @@ elif args.action == '*':
 	res = args.values[0] * args.values[1]
 elif args.action == '%':
 	res = args.values[0] / args.values[1]
+else:
+	exit('incorrect operation')
 	
 #print(type(args.action))
-list = str(args.values[0]) +' ' + args.action+ ' ' + str(args.values[1])+' = ' + str(res)
+lst = str(args.values[0]) +' ' + args.action+ ' ' + str(args.values[1])+' = ' + str(res)
 #res = eval(list)
 if args.verbose: 
-	print(list)
+	print(lst)
 else:
 	print(res)
-
